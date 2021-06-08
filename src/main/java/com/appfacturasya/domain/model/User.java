@@ -17,9 +17,6 @@ public class User {
     private Long id;
 
     @NotNull
-    @Size(max = 15)
-    @NaturalId
-    @Column(unique = true)
     private String username;
 
     @NotNull
@@ -29,8 +26,6 @@ public class User {
 
     @NotNull
     @NotBlank
-    @Size(max = 25)
-    @Column(unique = true)
     private String name;
 
     @NotNull
