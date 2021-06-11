@@ -19,6 +19,5 @@ public class SaveInitialCostResource {
     private String expressedName;
 
     @NotNull
-    @NotBlank
     private Double expressedValue;
 }

@@ -23,15 +23,13 @@ public class RateTerm {
     private Integer daysPerYear;
 
     @NotNull
-    @NotBlank
     private Integer rateTerm;
 
     @NotNull
-    @NotBlank
     private Double effectiveRate;
 
     @NotNull
-    @NotBlank
+    @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat
     private Date discountDate;
 

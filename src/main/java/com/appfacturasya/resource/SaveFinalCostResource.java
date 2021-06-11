@@ -18,6 +18,5 @@ public class SaveFinalCostResource {
     private String expressedName;
 
     @NotNull
-    @NotBlank
     private Double expressedValue;
 }

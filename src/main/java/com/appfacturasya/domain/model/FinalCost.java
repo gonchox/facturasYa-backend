@@ -28,7 +28,6 @@ public class FinalCost {
     private String expressedName;
 
     @NotNull
-    @NotBlank
     private Double expressedValue;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

@@ -21,19 +21,17 @@ public class Invoice {
     private Long id;
 
     @NotNull
-    @NotBlank
+    @Temporal(TemporalType.TIMESTAMP)
     private Date issueDate;
 
     @NotNull
-    @NotBlank
+    @Temporal(TemporalType.TIMESTAMP)
     private Date paymentDay;
 
     @NotNull
-    @NotBlank
     private Double total;
 
     @NotNull
-    @NotBlank
     private Double retention;
 
     @NotNull
@@ -41,7 +39,6 @@ public class Invoice {
     private String currency;
 
     @NotNull
-    @NotBlank
     private Double debtorRUC;
 
     @NotNull

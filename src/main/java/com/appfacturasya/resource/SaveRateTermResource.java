@@ -4,6 +4,8 @@ import com.sun.istack.NotNull;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
@@ -13,15 +15,13 @@ public class SaveRateTermResource {
     private Integer daysPerYear;
 
     @NotNull
-    @NotBlank
     private Integer rateTerm;
 
     @NotNull
-    @NotBlank
     private Double effectiveRate;
 
     @NotNull
-    @NotBlank
+    @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat
     private Date discountDate;
 }

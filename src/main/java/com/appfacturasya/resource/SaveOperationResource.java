@@ -3,6 +3,8 @@ package com.appfacturasya.resource;
 import com.sun.istack.NotNull;
 import lombok.Data;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
@@ -10,14 +12,12 @@ import java.util.Date;
 public class SaveOperationResource {
 
     @NotNull
-    @NotBlank
+    @Temporal(TemporalType.TIMESTAMP)
     private Date operationDate;
 
     @NotNull
-    @NotBlank
     private Double totalAmount;
 
     @NotNull
-    @NotBlank
     private Double tir;
 }

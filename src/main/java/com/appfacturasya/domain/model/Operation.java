@@ -5,6 +5,7 @@ import com.sun.istack.NotNull;
 import lombok.Data;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -19,15 +20,13 @@ public class Operation {
     private Long id;
 
     @NotNull
-    @NotBlank
+    @Temporal(TemporalType.TIMESTAMP)
     private Date operationDate;
 
     @NotNull
-    @NotBlank
     private Double totalAmount;
 
     @NotNull
-    @NotBlank
     private Double tir;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
