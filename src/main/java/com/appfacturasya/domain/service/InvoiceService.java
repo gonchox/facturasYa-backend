@@ -8,9 +8,9 @@ import org.springframework.http.ResponseEntity;
 
 public interface InvoiceService {
 
-    ResponseEntity<?> deleteInvoice(Long invoiceId, Long operationId);
+    ResponseEntity<?> deleteInvoice(Long invoiceId);
 
-    Invoice updateInvoice(Long invoiceId,Long operationId, Invoice invoiceRequest);
+    Invoice updateInvoice(Long invoiceId, Invoice invoiceRequest);
 
     Page<Invoice> getAllInvoicesByOperationId(Long operationId, Pageable pageable);
 

@@ -67,16 +67,16 @@ public class InitialCostController {
 
     @Operation(security={ @SecurityRequirement(name="Authorization") })
     @PutMapping("/operations/{operationId}/initialCosts/{id}")
-    public InitialCostResource updateInitialCost(@PathVariable(name = "id") Long initialCostId,@PathVariable(name = "operationId") Long operationId,
+    public InitialCostResource updateInitialCost(@PathVariable(name = "id") Long initialCostId,
                                          @Valid @RequestBody SaveInitialCostResource resource) {
         InitialCost initialCost = convertToEntity(resource);
-        return convertToResource(initialCostService.updateInitialCost(initialCostId,operationId,initialCost));
+        return convertToResource(initialCostService.updateInitialCost(initialCostId,initialCost));
     }
 
     @Operation(security={ @SecurityRequirement(name="Authorization") })
     @DeleteMapping("/operations/{operationId}/initialCosts/{id}")
-    public ResponseEntity<?> deleteInitialCost(@PathVariable(name = "id") Long initialCostId, @PathVariable(name = "operationId") Long operationId) {
-        return initialCostService.deleteInitialCost(initialCostId,operationId);
+    public ResponseEntity<?> deleteInitialCost(@PathVariable(name = "id") Long initialCostId) {
+        return initialCostService.deleteInitialCost(initialCostId);
     }
     // Auto Mapper
     private InitialCost convertToEntity(SaveInitialCostResource resource) {

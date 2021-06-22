@@ -67,16 +67,16 @@ public class FinalCostController {
 
     @Operation(security={ @SecurityRequirement(name="Authorization") })
     @PutMapping("/operations/{operationId}/finalCosts/{id}")
-    public FinalCostResource updateFinalCost(@PathVariable(name = "id") Long finalCostId,@PathVariable(name = "operationId") Long operationId,
+    public FinalCostResource updateFinalCost(@PathVariable(name = "id") Long finalCostId,
                                              @Valid @RequestBody SaveFinalCostResource resource) {
         FinalCost finalCost = convertToEntity(resource);
-        return convertToResource(finalCostService.updateFinalCost(finalCostId,operationId,finalCost));
+        return convertToResource(finalCostService.updateFinalCost(finalCostId,finalCost));
     }
 
     @Operation(security={ @SecurityRequirement(name="Authorization") })
     @DeleteMapping("/operations/{operationId}/finalCosts/{id}")
-    public ResponseEntity<?> deleteFinalCost(@PathVariable(name = "id") Long finalCostId, @PathVariable(name = "operationId") Long operationId) {
-        return finalCostService.deleteFinalCost(finalCostId,operationId);
+    public ResponseEntity<?> deleteFinalCost(@PathVariable(name = "id") Long finalCostId) {
+        return finalCostService.deleteFinalCost(finalCostId);
     }
     // Auto Mapper
     private FinalCost convertToEntity(SaveFinalCostResource resource) {

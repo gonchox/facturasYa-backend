@@ -7,9 +7,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 public interface InitialCostService {
-    ResponseEntity<?> deleteInitialCost(Long initialCostId, Long operationId);
+    ResponseEntity<?> deleteInitialCost(Long initialCostId);
 
-    InitialCost updateInitialCost(Long initialCostId, Long operationId, InitialCost initialCostRequest);
+    InitialCost updateInitialCost(Long initialCostId, InitialCost initialCostRequest);
 
     Page<InitialCost> getAllInitialCostsByOperationId(Long operationId, Pageable pageable);
 

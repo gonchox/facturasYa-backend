@@ -25,7 +25,7 @@ public class OperationServiceImpl implements OperationService {
     private RateTermRepository rateTermRepository;
 
     @Override
-    public ResponseEntity<?> deleteOperation(Long operationId, Long userId, Long rateTermId) {
+    public ResponseEntity<?> deleteOperation(Long operationId) {
         Operation operation = operationRepository.findById(operationId).orElseThrow(() -> new ResourceNotFoundException("Operation", "Id", operationId));
         operationRepository.delete(operation);
         return ResponseEntity.ok().build();

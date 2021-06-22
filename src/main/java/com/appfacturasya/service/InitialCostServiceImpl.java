@@ -21,14 +21,14 @@ public class InitialCostServiceImpl implements InitialCostService {
     private OperationRepository operationRepository;
 
     @Override
-    public ResponseEntity<?> deleteInitialCost(Long initialCostId, Long operationId) {
+    public ResponseEntity<?> deleteInitialCost(Long initialCostId) {
         InitialCost initialCost = initialCostRepository.findById(initialCostId).orElseThrow(() -> new ResourceNotFoundException("InitialCost", "Id", initialCostId));
         initialCostRepository.delete(initialCost);
         return ResponseEntity.ok().build();
     }
 
     @Override
-    public InitialCost updateInitialCost(Long initialCostId, Long operationId, InitialCost initialCostRequest) {
+    public InitialCost updateInitialCost(Long initialCostId,InitialCost initialCostRequest) {
         InitialCost initialCost = initialCostRepository.findById(initialCostId)
                 .orElseThrow(() -> new ResourceNotFoundException("InitialCost", "Id", initialCostId));
         initialCost.setExpressedName(initialCost.getExpressedName());

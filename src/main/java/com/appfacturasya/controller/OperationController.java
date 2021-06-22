@@ -76,10 +76,9 @@ public class OperationController {
 
     @io.swagger.v3.oas.annotations.Operation(security={ @SecurityRequirement(name="Authorization") })
     @DeleteMapping("/users/{userId}/rateTerms/{rateTermsId}/posts/{postId}")
-    public ResponseEntity<?> deleteOperation(@PathVariable(name = "userId") Long userId,
-                                             @PathVariable(name = "rateTermId") Long rateTermId,
+    public ResponseEntity<?> deleteOperation(
                                         @PathVariable(name = "operationId") Long operationId) {
-        return operationService.deleteOperation(userId,rateTermId, operationId);
+        return operationService.deleteOperation(operationId);
     }
 
     @io.swagger.v3.oas.annotations.Operation(security={ @SecurityRequirement(name="Authorization") })

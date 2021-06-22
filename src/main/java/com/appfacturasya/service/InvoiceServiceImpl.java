@@ -24,14 +24,14 @@ public class InvoiceServiceImpl implements InvoiceService {
     private OperationRepository operationRepository;
 
     @Override
-    public ResponseEntity<?> deleteInvoice(Long invoiceId, Long operationId) {
+    public ResponseEntity<?> deleteInvoice(Long invoiceId) {
         Invoice invoice = invoiceRepository.findById(invoiceId).orElseThrow(() -> new ResourceNotFoundException("Invoice", "Id", invoiceId));
         invoiceRepository.delete(invoice);
         return ResponseEntity.ok().build();
     }
 
     @Override
-    public Invoice updateInvoice(Long invoiceId,Long operationId, Invoice invoiceRequest) {
+    public Invoice updateInvoice(Long invoiceId, Invoice invoiceRequest) {
         Invoice invoice = invoiceRepository.findById(invoiceId)
                 .orElseThrow(() -> new ResourceNotFoundException("Invoice", "Id", invoiceId));
        invoice.setCurrency(invoice.getCurrency());

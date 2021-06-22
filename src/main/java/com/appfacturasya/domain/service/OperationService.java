@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 public interface OperationService {
-    ResponseEntity<?> deleteOperation(Long operationId, Long userId, Long rateTermId);
+    ResponseEntity<?> deleteOperation(Long operationId);
 
     Page<Operation> getAllOperationsByUserId(Long userId, Pageable pageable);
 

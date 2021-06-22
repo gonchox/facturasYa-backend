@@ -23,14 +23,14 @@ public class FinalCostServiceImpl implements FinalCostService {
     private OperationRepository operationRepository;
 
     @Override
-    public ResponseEntity<?> deleteFinalCost(Long finalCostId, Long operationId) {
+    public ResponseEntity<?> deleteFinalCost(Long finalCostId) {
         FinalCost finalCost = finalCostRepository.findById(finalCostId).orElseThrow(() -> new ResourceNotFoundException("FinalCost", "Id", finalCostId));
         finalCostRepository.delete(finalCost);
         return ResponseEntity.ok().build();
     }
 
     @Override
-    public FinalCost updateFinalCost(Long finalCostId, Long operationId, FinalCost finalCostRequest) {
+    public FinalCost updateFinalCost(Long finalCostId, FinalCost finalCostRequest) {
         FinalCost finalCost = finalCostRepository.findById(finalCostId)
                 .orElseThrow(() -> new ResourceNotFoundException("FinalCost", "Id", finalCostId));
         finalCost.setExpressedName(finalCost.getExpressedName());

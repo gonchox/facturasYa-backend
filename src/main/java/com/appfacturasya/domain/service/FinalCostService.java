@@ -6,9 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 public interface FinalCostService {
-    ResponseEntity<?> deleteFinalCost(Long finalCostId, Long operationId);
+    ResponseEntity<?> deleteFinalCost(Long finalCostId);
 
-    FinalCost updateFinalCost(Long finalCostId, Long operationId, FinalCost finalCostRequest);
+    FinalCost updateFinalCost(Long finalCostId,FinalCost finalCostRequest);
 
     Page<FinalCost> getAllFinalCostsByOperationId(Long operationId, Pageable pageable);
 

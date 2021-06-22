@@ -64,16 +64,16 @@ public class InvoiceController {
 
     @Operation(security={ @SecurityRequirement(name="Authorization") })
     @PutMapping("/operations/{operationId}/invoices/{id}")
-    public InvoiceResource updateInvoice(@PathVariable(name = "id") Long invoiceId,@PathVariable(name = "operationId") Long operationId,
+    public InvoiceResource updateInvoice(@PathVariable(name = "id") Long invoiceId,
                                          @Valid @RequestBody SaveInvoiceResource resource) {
         Invoice invoice = convertToEntity(resource);
-        return convertToResource(invoiceService.updateInvoice(invoiceId,operationId,invoice));
+        return convertToResource(invoiceService.updateInvoice(invoiceId,invoice));
     }
 
     @Operation(security={ @SecurityRequirement(name="Authorization") })
     @DeleteMapping("/operations/{operationId}/invoices/{id}")
-    public ResponseEntity<?> deleteInvoice(@PathVariable(name = "id") Long invoiceId, @PathVariable(name = "operationId") Long operationId) {
-        return invoiceService.deleteInvoice(invoiceId,operationId);
+    public ResponseEntity<?> deleteInvoice(@PathVariable(name = "id") Long invoiceId) {
+        return invoiceService.deleteInvoice(invoiceId);
     }
     // Auto Mapper
     private Invoice convertToEntity(SaveInvoiceResource resource) {
