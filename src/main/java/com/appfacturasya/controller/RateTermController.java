@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class RateTermController {
     @Autowired
     private RateTermService rateTermService;
 
-    @Operation(summary = "Get RateTerms", description = "Get All RateTerms by Pages", tags = { "rateTerms" })
+    @Operation(summary = "Get RateTerms", description = "Get All RateTerms by Pages", tags = { "rateTerms" },security={ @SecurityRequirement(name="Authorization") })
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "All RateTerms returned", content = @Content(mediaType = "application/json"))
     })
@@ -45,7 +46,7 @@ public class RateTermController {
     }
 
 
-    @Operation(summary = "Get RateTerm by Id", description = "Get a RateTerm by specifying Id", tags = { "rateTerms" })
+    @Operation(summary = "Get RateTerm by Id", description = "Get a RateTerm by specifying Id", tags = { "rateTerms" },security={ @SecurityRequirement(name="Authorization") })
     @GetMapping("/rateTerms/{id}")
     public RateTermResource getRateTermById(
             @Parameter(description="RateTerm Id")
@@ -53,21 +54,21 @@ public class RateTermController {
         return convertToResource(rateTermService.getRateTermById(rateTermId));
     }
 
-    //@Operation(security={ @SecurityRequirement(name="Authorization") })
+    @Operation(security={ @SecurityRequirement(name="Authorization") })
     @PostMapping("/rateTerms")
     public RateTermResource createRateTerm(@Valid @RequestBody SaveRateTermResource resource)  {
         RateTerm rateTerm = convertToEntity(resource);
         return convertToResource(rateTermService.createRateTerm(rateTerm));
     }
 
-    //@Operation(security={ @SecurityRequirement(name="Authorization") })
+    @Operation(security={ @SecurityRequirement(name="Authorization") })
     @PutMapping("/rateTerms/{id}")
     public RateTermResource updateRateTerm(@PathVariable(name = "id") Long rateTermId, @Valid @RequestBody SaveRateTermResource resource) {
         RateTerm rateTerm = convertToEntity(resource);
         return convertToResource(rateTermService.updateRateTerm(rateTermId, rateTerm));
     }
 
-    //@Operation(security={ @SecurityRequirement(name="Authorization") })
+    @Operation(security={ @SecurityRequirement(name="Authorization") })
     @DeleteMapping("/rateTerms/{id}")
     public ResponseEntity<?> deleteRateTerm(@PathVariable(name = "id") Long rateTermId) {
         return rateTermService.deleteRateTerm(rateTermId);

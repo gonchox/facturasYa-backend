@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class InvoiceController {
     @Autowired
     private InvoiceService invoiceService;
 
-    @Operation(summary = "Get Invoices", description = "Get All Invoices by Pages", tags = { "invoices" })
+    @Operation(summary = "Get Invoices", description = "Get All Invoices by Pages", tags = { "invoices" },security={ @SecurityRequirement(name="Authorization") })
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "All Invoices returned", content = @Content(mediaType = "application/json"))
     })
@@ -46,7 +47,7 @@ public class InvoiceController {
     }
 
 
-    @Operation(summary = "Get Invoice by Id", description = "Get a Invoice by specifying Id", tags = { "invoices" })
+    @Operation(summary = "Get Invoice by Id", description = "Get a Invoice by specifying Id", tags = { "invoices" },security={ @SecurityRequirement(name="Authorization") })
     @GetMapping("/operations/invoices/{id}")
     public InvoiceResource getInvoiceById(
             @Parameter(description="Invoice Id")
@@ -54,14 +55,14 @@ public class InvoiceController {
         return convertToResource(invoiceService.getInvoiceById(invoiceId));
     }
 
-    //@Operation(security={ @SecurityRequirement(name="Authorization") })
+    @Operation(security={ @SecurityRequirement(name="Authorization") })
     @PostMapping("/operations/{operationId}/invoices")
     public InvoiceResource createInvoices(@PathVariable(name = "operationId") Long operationId, @Valid @RequestBody SaveInvoiceResource resource)  {
         Invoice invoice = convertToEntity(resource);
         return convertToResource(invoiceService.createInvoice(invoice, operationId));
     }
 
-    //@Operation(security={ @SecurityRequirement(name="Authorization") })
+    @Operation(security={ @SecurityRequirement(name="Authorization") })
     @PutMapping("/operations/{operationId}/invoices/{id}")
     public InvoiceResource updateInvoice(@PathVariable(name = "id") Long invoiceId,@PathVariable(name = "operationId") Long operationId,
                                          @Valid @RequestBody SaveInvoiceResource resource) {
@@ -69,7 +70,7 @@ public class InvoiceController {
         return convertToResource(invoiceService.updateInvoice(invoiceId,operationId,invoice));
     }
 
-    //@Operation(security={ @SecurityRequirement(name="Authorization") })
+    @Operation(security={ @SecurityRequirement(name="Authorization") })
     @DeleteMapping("/operations/{operationId}/invoices/{id}")
     public ResponseEntity<?> deleteInvoice(@PathVariable(name = "id") Long invoiceId, @PathVariable(name = "operationId") Long operationId) {
         return invoiceService.deleteInvoice(invoiceId,operationId);

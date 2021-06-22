@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 import javax.validation.Valid;
 import java.util.List;
@@ -32,10 +34,10 @@ public class OperationController {
     @Autowired
     private OperationService operationService;
 
+    @io.swagger.v3.oas.annotations.Operation(security={ @SecurityRequirement(name="Authorization") })
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "All Operations returned", content = @Content(mediaType = "application/json"))
     })
-
 
     @GetMapping("/users/{userId}/operations")
     public Page<OperationResource> getAllOperationsByUserId(@PathVariable(name = "userId") Long userId, Pageable pageable) {
@@ -44,7 +46,7 @@ public class OperationController {
         int count = operations.size();
         return new PageImpl<>(operations, pageable, count);
     }
-
+    @io.swagger.v3.oas.annotations.Operation(security={ @SecurityRequirement(name="Authorization") })
     @GetMapping("/operations/{id}")
     public OperationResource getOperationById(
             @Parameter(description="Operation Id")
@@ -58,22 +60,21 @@ public class OperationController {
      //   return convertToResource(postService.getPostByIdAndUserId(userId, postId));
    // }
 
-    //@Operation(security={ @SecurityRequirement(name="Authorization") })
+    @io.swagger.v3.oas.annotations.Operation(security={ @SecurityRequirement(name="Authorization") })
     @PostMapping("/users/{userId}/rateTerms/{rateTermId}/operations")
     public OperationResource createOperation(@PathVariable(name = "userId") Long userId, @PathVariable(name = "rateTermId") Long rateTermId,
                                    @Valid @RequestBody SaveOperationResource resource) {
         return convertToResource(operationService.createOperation(convertToEntity(resource),userId,rateTermId));
 
     }
-
+    @io.swagger.v3.oas.annotations.Operation(security={ @SecurityRequirement(name="Authorization") })
     @PutMapping("/users/{userId}/rateTerms/{rateTermId}/operations/{operationId}")
-    public OperationResource updateOperation(@PathVariable(name = "userId") Long userId, @PathVariable(name = "rateTermId") Long rateTermId,
-                                   @PathVariable(name = "operationId") Long operationId,
-                                   @Valid @RequestBody SaveOperationResource resource) {
-        return convertToResource(operationService.updateOperation(operationId, convertToEntity(resource),userId, rateTermId));
+    public OperationResource updateOperation(@PathVariable(name = "operationId") Long operationId,
+                                             @Valid @RequestBody SaveOperationResource resource) {
+        return convertToResource(operationService.updateOperation(operationId, convertToEntity(resource)));
     }
 
-
+    @io.swagger.v3.oas.annotations.Operation(security={ @SecurityRequirement(name="Authorization") })
     @DeleteMapping("/users/{userId}/rateTerms/{rateTermsId}/posts/{postId}")
     public ResponseEntity<?> deleteOperation(@PathVariable(name = "userId") Long userId,
                                              @PathVariable(name = "rateTermId") Long rateTermId,
@@ -81,7 +82,7 @@ public class OperationController {
         return operationService.deleteOperation(userId,rateTermId, operationId);
     }
 
-
+    @io.swagger.v3.oas.annotations.Operation(security={ @SecurityRequirement(name="Authorization") })
     @GetMapping("/operations")
     public Page<OperationResource> getAllOperations(
             @Parameter(description="Pageable Parameter")

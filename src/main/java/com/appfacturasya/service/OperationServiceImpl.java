@@ -37,7 +37,7 @@ public class OperationServiceImpl implements OperationService {
     }
 
     @Override
-    public Operation updateOperation(Long operationId, Operation operationRequest, Long userId, Long rateTermId) {
+    public Operation updateOperation(Long operationId, Operation operationRequest) {
         Operation operation = operationRepository.findById(operationId)
                 .orElseThrow(() -> new ResourceNotFoundException("Operation", "Id", operationId));
         operation.setOperationDate(operationRequest.getOperationDate());

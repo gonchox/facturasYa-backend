@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class InitialCostController {
     @Autowired
     private InitialCostService initialCostService;
 
-    @Operation(summary = "Get InitialCosts", description = "Get All InitialCosts by Pages", tags = { "initialCosts" })
+    @Operation(summary = "Get InitialCosts", description = "Get All InitialCosts by Pages", tags = { "initialCosts" },security={ @SecurityRequirement(name="Authorization") })
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "All InitialCosts returned", content = @Content(mediaType = "application/json"))
     })
@@ -49,7 +50,7 @@ public class InitialCostController {
     }
 
 
-    @Operation(summary = "Get Initial Cost by Id", description = "Get a Initial Cost by specifying Id", tags = { "initialCosts" })
+    @Operation(summary = "Get Initial Cost by Id", description = "Get a Initial Cost by specifying Id", tags = { "initialCosts" },security={ @SecurityRequirement(name="Authorization") })
     @GetMapping("operations/initialCosts/{id}")
     public InitialCostResource getInitialCostById(
             @Parameter(description="InitialCost Id")
@@ -57,14 +58,14 @@ public class InitialCostController {
         return convertToResource(initialCostService.getInitialCostById(initialCostId));
     }
 
-    //@Operation(security={ @SecurityRequirement(name="Authorization") })
+    @Operation(security={ @SecurityRequirement(name="Authorization") })
     @PostMapping("/operations/{operationId}/initialCosts")
     public InitialCostResource createInitialCost(@PathVariable(name = "operationId") Long operationId, @Valid @RequestBody SaveInitialCostResource resource)  {
         InitialCost initialCost = convertToEntity(resource);
         return convertToResource(initialCostService.createInitialCost(initialCost, operationId));
     }
 
-    //@Operation(security={ @SecurityRequirement(name="Authorization") })
+    @Operation(security={ @SecurityRequirement(name="Authorization") })
     @PutMapping("/operations/{operationId}/initialCosts/{id}")
     public InitialCostResource updateInitialCost(@PathVariable(name = "id") Long initialCostId,@PathVariable(name = "operationId") Long operationId,
                                          @Valid @RequestBody SaveInitialCostResource resource) {
@@ -72,7 +73,7 @@ public class InitialCostController {
         return convertToResource(initialCostService.updateInitialCost(initialCostId,operationId,initialCost));
     }
 
-    //@Operation(security={ @SecurityRequirement(name="Authorization") })
+    @Operation(security={ @SecurityRequirement(name="Authorization") })
     @DeleteMapping("/operations/{operationId}/initialCosts/{id}")
     public ResponseEntity<?> deleteInitialCost(@PathVariable(name = "id") Long initialCostId, @PathVariable(name = "operationId") Long operationId) {
         return initialCostService.deleteInitialCost(initialCostId,operationId);

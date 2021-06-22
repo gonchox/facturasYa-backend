@@ -11,7 +11,7 @@ public interface OperationService {
 
     Page<Operation> getAllOperationsByUserId(Long userId, Pageable pageable);
 
-    Operation updateOperation(Long operationId, Operation operationRequest, Long userId, Long rateTermId);
+    Operation updateOperation(Long operationId, Operation operationRequest);
 
     Operation createOperation(Operation operation, Long userId, Long rateTermId);
 
