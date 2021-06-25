@@ -4,9 +4,9 @@ import com.appfacturasya.domain.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface UserService extends UserDetailsService {
+
+public interface UserService {
     ResponseEntity<?> deleteUser(Long userId);
 
     User updateUser(Long userId, User userRequest);

@@ -8,23 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private static final String DEFAULT_USERNAME = "admin";
-    private static final List<GrantedAuthority> DEFAULT_AUTHORITIES = new ArrayList<>();
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+
+
 
     @Autowired
     private UserRepository userRepository;
@@ -69,12 +63,5 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("User", "Username", username));
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        String defaultPassword = passwordEncoder.encode("admin");
-        if(DEFAULT_USERNAME.equals(username)) {
-            return new org.springframework.security.core.userdetails.User(DEFAULT_USERNAME, defaultPassword, DEFAULT_AUTHORITIES);
-        }
-        throw new UsernameNotFoundException(String.format("User not found with username %s", username));
-    }
+
 }
