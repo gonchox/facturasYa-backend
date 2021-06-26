@@ -34,7 +34,7 @@ public class OperationController {
     @Autowired
     private OperationService operationService;
 
-   // @io.swagger.v3.oas.annotations.Operation(security={ @SecurityRequirement(name="Authorization") })
+    @io.swagger.v3.oas.annotations.Operation(security={ @SecurityRequirement(name="Authorization") })
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "All Operations returned", content = @Content(mediaType = "application/json"))
     })
@@ -46,7 +46,7 @@ public class OperationController {
         int count = operations.size();
         return new PageImpl<>(operations, pageable, count);
     }
-   // @io.swagger.v3.oas.annotations.Operation(security={ @SecurityRequirement(name="Authorization") })
+    @io.swagger.v3.oas.annotations.Operation(security={ @SecurityRequirement(name="Authorization") })
     @GetMapping("/operations/{id}")
     public OperationResource getOperationById(
             @Parameter(description="Operation Id")
@@ -60,28 +60,28 @@ public class OperationController {
      //   return convertToResource(postService.getPostByIdAndUserId(userId, postId));
    // }
 
-   // @io.swagger.v3.oas.annotations.Operation(security={ @SecurityRequirement(name="Authorization") })
+    @io.swagger.v3.oas.annotations.Operation(security={ @SecurityRequirement(name="Authorization") })
     @PostMapping("/users/{userId}/rateTerms/{rateTermId}/operations")
     public OperationResource createOperation(@PathVariable(name = "userId") Long userId, @PathVariable(name = "rateTermId") Long rateTermId,
                                    @Valid @RequestBody SaveOperationResource resource) {
         return convertToResource(operationService.createOperation(convertToEntity(resource),userId,rateTermId));
 
     }
-   // @io.swagger.v3.oas.annotations.Operation(security={ @SecurityRequirement(name="Authorization") })
+    @io.swagger.v3.oas.annotations.Operation(security={ @SecurityRequirement(name="Authorization") })
     @PutMapping("/users/{userId}/rateTerms/{rateTermId}/operations/{operationId}")
     public OperationResource updateOperation(@PathVariable(name = "operationId") Long operationId,
                                              @Valid @RequestBody SaveOperationResource resource) {
         return convertToResource(operationService.updateOperation(operationId, convertToEntity(resource)));
     }
 
-   // @io.swagger.v3.oas.annotations.Operation(security={ @SecurityRequirement(name="Authorization") })
+    @io.swagger.v3.oas.annotations.Operation(security={ @SecurityRequirement(name="Authorization") })
     @DeleteMapping("/users/{userId}/rateTerms/{rateTermsId}/posts/{postId}")
     public ResponseEntity<?> deleteOperation(
                                         @PathVariable(name = "operationId") Long operationId) {
         return operationService.deleteOperation(operationId);
     }
 
-   // @io.swagger.v3.oas.annotations.Operation(security={ @SecurityRequirement(name="Authorization") })
+    @io.swagger.v3.oas.annotations.Operation(security={ @SecurityRequirement(name="Authorization") })
     @GetMapping("/operations")
     public Page<OperationResource> getAllOperations(
             @Parameter(description="Pageable Parameter")

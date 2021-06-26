@@ -38,7 +38,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Operation(summary = "Get Users", description = "Get All Users by Pages", tags = { "users" })
+    @Operation(summary = "Get Users", description = "Get All Users by Pages", tags = { "users" },security={ @SecurityRequirement(name="Authorization") })
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "All Posts returned", content = @Content(mediaType = "application/json"))
     })
@@ -51,7 +51,7 @@ public class UserController {
     }
 
 
-    @Operation(summary = "Get User by Id", description = "Get a User by specifying Id", tags = { "users" })
+    @Operation(summary = "Get User by Id", description = "Get a User by specifying Id", tags = { "users" },security={ @SecurityRequirement(name="Authorization") })
     @GetMapping("/users/{id}")
     public UserResource getUserById(
             @Parameter(description="User Id")
@@ -66,14 +66,14 @@ public class UserController {
         return convertToResource(userService.createUser(user));
     }
 
-    //@Operation(security={ @SecurityRequirement(name="Authorization") })
+    @Operation(security={ @SecurityRequirement(name="Authorization") })
     @PutMapping("/users/{id}")
     public UserResource updateUser(@PathVariable(name = "id") Long userId, @Valid @RequestBody SaveUserResource resource) {
         User user = convertToEntity(resource);
         return convertToResource(userService.updateUser(userId, user));
     }
 
-    //@Operation(security={ @SecurityRequirement(name="Authorization") })
+    @Operation(security={ @SecurityRequirement(name="Authorization") })
     @DeleteMapping("/users/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable(name = "id") Long userId) {
         return userService.deleteUser(userId);

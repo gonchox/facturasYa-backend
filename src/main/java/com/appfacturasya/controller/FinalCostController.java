@@ -37,7 +37,7 @@ public class FinalCostController {
     @Autowired
     private FinalCostService finalCostService;
 
-    @Operation(summary = "Get Final Costs", description = "Get All Final Costs by Pages", tags = { "finalCosts" })
+    @Operation(summary = "Get Final Costs", description = "Get All Final Costs by Pages", tags = { "finalCosts" },security={ @SecurityRequirement(name="Authorization") })
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "All Final Costs returned", content = @Content(mediaType = "application/json"))
     })
@@ -50,7 +50,7 @@ public class FinalCostController {
     }
 
 
-    @Operation(summary = "Get Final Cost by Id", description = "Get a Final Cost by specifying Id", tags = { "finalCosts" })
+    @Operation(summary = "Get Final Cost by Id", description = "Get a Final Cost by specifying Id", tags = { "finalCosts" },security={ @SecurityRequirement(name="Authorization") })
     @GetMapping("operations/finalCosts/{id}")
     public FinalCostResource getFinalCostById(
             @Parameter(description="FinalCost Id")
@@ -58,14 +58,14 @@ public class FinalCostController {
         return convertToResource(finalCostService.getFinalCostById(finalCostId));
     }
 
-    //@Operation(security={ @SecurityRequirement(name="Authorization") })
+    @Operation(security={ @SecurityRequirement(name="Authorization") })
     @PostMapping("/operations/{operationId}/finalCosts")
     public FinalCostResource createFinalCost(@PathVariable(name = "operationId") Long operationId, @Valid @RequestBody SaveFinalCostResource resource)  {
         FinalCost finalCost = convertToEntity(resource);
         return convertToResource(finalCostService.createFinalCost(finalCost, operationId));
     }
 
-    //@Operation(security={ @SecurityRequirement(name="Authorization") })
+    @Operation(security={ @SecurityRequirement(name="Authorization") })
     @PutMapping("/operations/{operationId}/finalCosts/{id}")
     public FinalCostResource updateFinalCost(@PathVariable(name = "id") Long finalCostId,
                                              @Valid @RequestBody SaveFinalCostResource resource) {
@@ -73,7 +73,7 @@ public class FinalCostController {
         return convertToResource(finalCostService.updateFinalCost(finalCostId,finalCost));
     }
 
-    //@Operation(security={ @SecurityRequirement(name="Authorization") })
+    @Operation(security={ @SecurityRequirement(name="Authorization") })
     @DeleteMapping("/operations/{operationId}/finalCosts/{id}")
     public ResponseEntity<?> deleteFinalCost(@PathVariable(name = "id") Long finalCostId) {
         return finalCostService.deleteFinalCost(finalCostId);
