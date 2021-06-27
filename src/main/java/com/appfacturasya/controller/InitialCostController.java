@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 
 @Tag(name = "initialCosts", description = "InitialCosts API")
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api")
 public class InitialCostController {
     @Autowired

@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 
 @Tag(name = "rateTerms", description = "RateTerms API")
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api")
 public class RateTermController {
     @Autowired

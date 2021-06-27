@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 
 @Tag(name = "finalCosts", description = "FinalCosts API")
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api")
 public class FinalCostController {
     @Autowired

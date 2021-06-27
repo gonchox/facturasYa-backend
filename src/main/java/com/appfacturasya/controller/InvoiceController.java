@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 
 @Tag(name = "invoices", description = "Invoices API")
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api")
 public class InvoiceController {
 

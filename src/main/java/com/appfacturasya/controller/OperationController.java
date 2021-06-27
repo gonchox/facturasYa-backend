@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 
 @Tag(name = "operations", description = "Operations API")
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api")
 public class OperationController {
 
