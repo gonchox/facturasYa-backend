@@ -10,7 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "initial_costs")
+@Table(name = "final_costs")
 @Data
 public class FinalCost {
 
