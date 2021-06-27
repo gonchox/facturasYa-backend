@@ -26,7 +26,6 @@ public class AuthenticationController {
     @Autowired
     private UserService userService;
 
-
     @PostMapping("/sign-in")
     public ResponseEntity<?> generateAuthenticationToken(
             @RequestBody AuthenticationRequest request)

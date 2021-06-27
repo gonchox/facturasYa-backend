@@ -6,7 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-
 public interface UserService extends UserDetailsService {
     ResponseEntity<?> deleteUser(Long userId);
 
