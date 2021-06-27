@@ -17,7 +17,7 @@ public class RateTermResource {
 
     private Long id;
     private Integer daysPerYear;
-    private Integer rateTerm;
+    private String rateTerm;
     private Double effectiveRate;
     private Date discountDate;
 }

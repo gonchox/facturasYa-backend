@@ -15,7 +15,8 @@ public class SaveRateTermResource {
     private Integer daysPerYear;
 
     @NotNull
-    private Integer rateTerm;
+    @NotBlank
+    private String rateTerm;
 
     @NotNull
     private Double effectiveRate;
