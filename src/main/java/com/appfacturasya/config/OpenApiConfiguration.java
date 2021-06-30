@@ -13,8 +13,7 @@ public class OpenApiConfiguration {
     @Bean(name = "facturasyaOpenApi")
     public OpenAPI facturasyaOpenApi() {
         return new OpenAPI()
-                .components(new Components().addSecuritySchemes("Authorization",
-                        new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")))
+                .components(new Components())
                 .info(new Info()
                         .title("FacturasYa Application API")
                         .description("FacturasYa API implemented with Spring Boot RESTful service and documented using springdoc-openapi and OpenAPI 3.0"));
